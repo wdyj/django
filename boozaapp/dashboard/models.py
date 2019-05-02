@@ -63,3 +63,22 @@ class SalesInfoV2(models.Model):
     class Meta:
         managed = False  # Created from a view. Don't remove.
         db_table = 'sales_info_v2'
+
+class HskCashPurchase(models.Model):
+    user_id = models.IntegerField()
+    product_id = models.IntegerField()
+    product_name = models.CharField(max_length=40)
+    type = models.CharField(max_length=4)
+    market = models.CharField(max_length=8)
+    price = models.FloatField()
+    vat = models.FloatField()
+    price_total = models.FloatField()
+    is_consumed = models.IntegerField()
+    receipt = models.TextField(blank=True, null=True)
+    receipt_hash = models.CharField(max_length=255, blank=True, null=True)
+    modified_time = models.DateTimeField()
+    created_time = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'hsk_cash_purchase'

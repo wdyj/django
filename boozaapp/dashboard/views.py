@@ -75,4 +75,18 @@ def calc_sales_data(start,end,b_start,b_end,channel) :
         b_num = len(b_data)
         rate_num = round((num/b_num - 1) * 100,2)
     
+    elif channel == '핫스탁코리아' :
+        data = HskCashPurchase.objects.filter(created_time__range=[start, end])
+        b_data = HskCashPurchase.objects.filter(created_time__range=[b_start, b_end])
+        
+        # 총 매출액 계산
+        total = data.aggregate(Sum('price_total'))['price_total__sum']
+        b_total = b_data.aggregate(Sum('price_total'))['price_total__sum']
+        rate_total = round((total/b_total - 1) * 100,2)
+
+        # 총 결제건수 계산 
+        num = len(data)
+        b_num = len(b_data)
+        rate_num = round((num/b_num - 1) * 100,2)
+
     return data, rate_total, rate_num
