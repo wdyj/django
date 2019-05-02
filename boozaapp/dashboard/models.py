@@ -42,3 +42,24 @@ class EventChannel(models.Model):
     class Meta:
         #managed = False
         db_table = 'event_channel'
+
+class SalesInfoV2(models.Model):
+    id = models.IntegerField(primary_key=True)
+    user_id = models.IntegerField(blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+    email = models.CharField(max_length=300, blank=True, null=True)
+    product_id = models.IntegerField(blank=True, null=True)
+    product = models.CharField(max_length=45, blank=True, null=True)
+    market = models.CharField(max_length=45, blank=True, null=True)
+    total = models.FloatField(blank=True, null=True)
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    is_expired = models.CharField(max_length=1)
+    cnt_purchase = models.DecimalField(max_digits=32, decimal_places=0, blank=True, null=True)
+
+    def __str__(self) :
+        return str(self.id)
+
+    class Meta:
+        managed = False  # Created from a view. Don't remove.
+        db_table = 'sales_info_v2'
